@@ -6,8 +6,6 @@ Welcome! This will set up the trust relationship between GitHub and GCP.
 Click the icon below to run the setup script. It will prompt you for your GitHub repo name and handle the rest.
 
 <walkthrough-project-setup></walkthrough-project-setup>
-<walkthrough-project-id/>
-<walkthrough-project-name/>
 
 ```bash
-bash setup.sh
+bash setup.sh <walkthrough-project-id/>
