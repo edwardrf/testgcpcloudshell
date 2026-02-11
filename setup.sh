@@ -50,6 +50,9 @@ fi
 PROJECT_NUMBER=$(gcloud projects describe "$PROJECT_ID" --format="value(projectNumber)")
 PRINCIPAL="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL_NAME/attribute.repository/$GITHUB_REPO"
 
+# Wait a bit to ensure the provider is fully propagated
+sleep 10
+
 EXISTS=$(gcloud projects get-iam-policy "$PROJECT_ID" \
     --format="json(bindings)" | \
     jq --arg role "roles/admin" --arg member "$PRINCIPAL" \
