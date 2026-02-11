@@ -2,13 +2,11 @@
 set -euo pipefail
 
 # Extract the --print_file value from cloudshell_open command in history
-PRINT_FILE=$(cat ~/.bash_history | grep cloudshell_open | grep -oP '(?<=--print_file[=\s])\S+' | tail -1)
+PRINT_FILE=$(cat ~/.bash_history | grep cloudshell_open | grep -oP '(?<=--print_file[=\s])\S+' | tail -1 | tr -d '"')
 
 if [ -z "$PRINT_FILE" ]; then
     echo "No cloudshell_open command with --print_file parameter found in history"
     exit 1
-else
-    echo "Found tutorial file from history: $PRINT_FILE"
 fi
 
 PROJECT_ID="$1"
@@ -16,8 +14,8 @@ GITHUB_REPO="$PRINT_FILE"
 GITHUB_BRANCH="main"
 
 SAFE_REPO_NAME=$(echo "$GITHUB_REPO" | tr '[:upper:]' '[:lower:]' | tr '/_' '-')
-POOL_NAME="${SAFE_REPO_NAME}-pool"
-PROVIDER_NAME="${SAFE_REPO_NAME}-provider"
+POOL_NAME="${SAFE_REPO_NAME:0:26}-pool"
+PROVIDER_NAME="${SAFE_REPO_NAME:0:23}-provider"
 
 echo "Setting up Workload Identity for GitHub"
 echo "Project ID: $PROJECT_ID"
