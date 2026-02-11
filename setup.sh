@@ -57,6 +57,7 @@ EXISTS=$(gcloud projects get-iam-policy "$PROJECT_ID" \
 
 if [ "$EXISTS" -eq 0 ]; then
     gcloud projects add-iam-policy-binding "$PROJECT_ID" \
+        --quiet \
         --role="roles/owner" \
         --member="$PRINCIPAL"
 else
