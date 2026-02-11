@@ -52,13 +52,13 @@ PRINCIPAL="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/
 
 EXISTS=$(gcloud projects get-iam-policy "$PROJECT_ID" \
     --format="json(bindings)" | \
-    jq --arg role "roles/owner" --arg member "$PRINCIPAL" \
+    jq --arg role "roles/admin" --arg member "$PRINCIPAL" \
         '.bindings[] | select(.role==$role) | .members[] | select(.==$member)' | wc -l)
 
 if [ "$EXISTS" -eq 0 ]; then
     gcloud projects add-iam-policy-binding "$PROJECT_ID" \
         --quiet \
-        --role="roles/owner" \
+        --role="roles/admin" \
         --member="$PRINCIPAL"
 else
     echo "IAM binding for $GITHUB_REPO already exists, skipping"
