@@ -57,8 +57,7 @@ EXISTS=$(gcloud projects get-iam-policy "$PROJECT_ID" \
 if [ "$EXISTS" -eq 0 ]; then
     gcloud projects add-iam-policy-binding "$PROJECT_ID" \
         --role="roles/owner" \
-        --member="$PRINCIPAL" \
-        --condition="expression=resource.name.startsWith('projects/$PROJECT_ID'),title=GitHubFullAccess,$GITHUB_BRANCH"
+        --member="$PRINCIPAL"
 else
     echo "IAM binding for $GITHUB_REPO already exists, skipping"
 fi
