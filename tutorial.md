@@ -6,7 +6,6 @@ Welcome! This will set up the trust relationship between GitHub and GCP.
 Click the icon below to run the setup script. It will prompt you for your GitHub repo name and handle the rest.
 
 <walkthrough-project-setup></walkthrough-project-setup>
-<walkthrough-enable-apis apis="sts.googleapis.com"></walkthrough-enable-apis>
 
 ```bash
 bash setup.sh <walkthrough-project-id/>
