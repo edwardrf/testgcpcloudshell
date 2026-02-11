@@ -28,7 +28,7 @@ if ! gcloud iam workload-identity-pools describe "$POOL_NAME" --project="$PROJEC
     gcloud iam workload-identity-pools create "$POOL_NAME" \
         --project="$PROJECT_ID" \
         --location="global" \
-        --display-name="GitHub Actions Pool for $GITHUB_REPO"
+        --display-name="GitHub Actions Pool"
 else
     echo "Workload Identity Pool $POOL_NAME already exists, skipping"
 fi
