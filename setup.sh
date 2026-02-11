@@ -47,7 +47,8 @@ else
     echo "OIDC Provider $PROVIDER_NAME already exists, skipping"
 fi
 
-PRINCIPAL="principalSet://iam.googleapis.com/projects/$PROJECT_ID/locations/global/workloadIdentityPools/$POOL_NAME/attribute.repository/$GITHUB_REPO"
+PROJECT_NUMBER=$(gcloud projects describe "$PROJECT_ID" --format="value(projectNumber)")
+PRINCIPAL="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL_NAME/attribute.repository/$GITHUB_REPO"
 
 EXISTS=$(gcloud projects get-iam-policy "$PROJECT_ID" \
     --format="json(bindings)" | \
