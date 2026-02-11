@@ -41,7 +41,8 @@ if ! gcloud iam workload-identity-pools providers describe "$PROVIDER_NAME" \
         --workload-identity-pool="$POOL_NAME" \
         --display-name="GitHub Actions Provider" \
         --issuer-uri="https://token.actions.githubusercontent.com" \
-        --attribute-mapping="google.subject=assertion.sub,repository=assertion.repository,ref=assertion.ref"
+        --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner" \
+        --attribute-condition="assertion.repository == '${GITHUB_REPO}'"
 else
     echo "OIDC Provider $PROVIDER_NAME already exists, skipping"
 fi
